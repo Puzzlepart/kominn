@@ -1,16 +1,16 @@
 import { DetailsList, IColumn, SelectionMode } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as React from "react";
-import { DataAdapter } from "../../Common/DataAdapter";
-import { Suggestion } from "../../Common/Suggestion";
+import { DataAdapter } from "../../../Data/DataAdapter";
 import { IMySuggestionsState } from "./IMySuggestionsState";
 import "./MySuggestions.module.scss";
+import { Suggestion } from "../../../Models";
 
 export class MySuggestions extends React.Component<any, IMySuggestionsState>
 {
 	constructor(props: any) {
 		super(props);
-		this.state = { suggestions: new Array<Suggestion>() };
+		this.state = { suggestions: [] };
 	}
 
 	async componentWillMount() {

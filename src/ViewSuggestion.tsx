@@ -1,11 +1,11 @@
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
 import { Searchbar } from "./Components/Frontpage/Searchbar";
-import { Content, Actions, Summary, MapView, Details, InspiredBy, Comments, SuggestionRating } from "./Components/ViewSuggestion";
-import { Suggestion } from "./Components/Common/Suggestion";
-import { DataAdapter } from "./Components/Common/DataAdapter";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
+import { Actions, Comments, Content, Details, InspiredBy, MapView, SuggestionRating, Summary } from "./Components/ViewSuggestion";
+import { DataAdapter } from "./Data/DataAdapter";
+import { IViewSuggestionState } from "./IViewSuggestionState";
+import { Suggestion } from "./Models";
 
-interface IViewSuggestionState { suggestion: Suggestion }
 export class ViewSuggestion extends React.Component<any, IViewSuggestionState>
 {
     private dataAdapter = new DataAdapter();
@@ -32,7 +32,7 @@ export class ViewSuggestion extends React.Component<any, IViewSuggestionState>
             return;
         }
         this.dataAdapter.getSuggestionById(id).then(
-            (s: Array<Suggestion>) => {
+            (s: Suggestion[]) => {
                 if (s.length <= 0) {
                     this.redirectToFrontpage();
                     return;

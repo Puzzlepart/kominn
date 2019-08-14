@@ -1,8 +1,8 @@
 import * as React from "react";
 import Slider from "react-slick";
 import "./PromotedSuggestions.module.scss";
-import { DataAdapter } from "../../Common/DataAdapter";
-import { Status } from "../../Common/Status";
+import { DataAdapter } from "../../../Data/DataAdapter";
+import { Status } from "../../../Models/Status";
 import { IPromotedSuggestionsState } from "./IPromotedSuggestionsState";
 
 interface IPromotedSuggestionsProps { }

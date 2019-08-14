@@ -4,9 +4,8 @@ import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { ImageFit } from "office-ui-fabric-react/lib/Image";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import * as React from "react";
-import { DataAdapter } from "../../Common/DataAdapter";
-import { Status } from "../../Common/Status";
-import { Suggestion } from "../../Common/Suggestion";
+import { DataAdapter } from "../../../Data/DataAdapter";
+import { Status, Suggestion } from "../../../Models";
 import { IPopularSuggestionsProps } from "./IPopularSuggestionsProps";
 import { IPopularSuggestionsState } from "./IPopularSuggestionsState";
 import "./PopularSuggestions.module.scss";
@@ -20,7 +19,7 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
     constructor(props: IPopularSuggestionsProps) {
         super(props);
         this.state = {
-            suggestions: new Array<Suggestion>(),
+            suggestions: [],
             top: 3,
             sorting: PopularSuggestionsSortTypes.DateDesc,
             filter: [],
@@ -94,7 +93,7 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
                     <DocumentCardLocation location={i.Submitter.Name} />
                     <DocumentCardActions actions={[
                         { onClick: () => this.dataAdapter.updateLike(i), iconProps: { iconName: "Like" }, name: `${i.Likes}`, },
-                        { iconProps: { iconName: "Comment" }, name: `${i.NumberOfComments}`, },
+                        { iconProps: { iconName: "SuggestionComment" }, name: `${i.NumberOfComments}`, },
                     ]} />
                 </DocumentCard>
             </div>

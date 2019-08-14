@@ -1,22 +1,22 @@
 import * as React from "react";
 import { ActionButton } from 'office-ui-fabric-react/lib/Button';
-import { Suggestion } from "../../Common/Suggestion";
-import { DataAdapter } from "../../Common/DataAdapter";
+import { DataAdapter } from "../../../Data/DataAdapter";
 import { NodeView } from "../NodeView";
 import { IInspiredByProps } from "./IInspiredByProps";
 import { IInspiredByState } from "./IInspiredByState";
 import { InspiredByView } from "./InspiredByView";
 import { PinTypes } from "./PinTypes";
 import { IConnection } from "./IConnection";
+import { Suggestion } from "../../../Models";
 
 export class InspiredBy extends React.Component<IInspiredByProps, IInspiredByState>
 {
-    private suggestions: Array<Suggestion>;
+    private suggestions: Suggestion[];
     private map: google.maps.Map = null;
 
     constructor(props: IInspiredByProps) {
         super(props);
-        this.state = { suggestions: new Array<Suggestion>(), selectedView: InspiredByView.Map };
+        this.state = { suggestions: [], selectedView: InspiredByView.Map };
     }
 
     render() {
@@ -132,7 +132,7 @@ export class InspiredBy extends React.Component<IInspiredByProps, IInspiredBySta
     componentDidMount() {
         var da = new DataAdapter();
         da.getAllSuggestions(null, 2000, "&$filter=KmiStatus ne 'Sendt inn'&$select=Id,Title,KmiLocation,KmiInspiredBy/Id,KmiInspiredBy/Title&$expand=KmiInspiredBy&orderby=Created desc")
-            .then((results: Array<Suggestion>) => {
+            .then((results: Suggestion[]) => {
                 this.suggestions = results;
                 this.setState({ suggestions: results });
                 this.drawMap();

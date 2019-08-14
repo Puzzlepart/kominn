@@ -1,14 +1,15 @@
-import * as React from "react";
-import "./Searchbar.module.scss";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
-import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { Callout } from "office-ui-fabric-react/lib/Callout";
+import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import { Suggestion } from "../../Common/Suggestion";
-import { DataAdapter } from "../../Common/DataAdapter";
-import { SubmitSuggestionButtons } from "../../Common/SubmitSuggestionButtons"
+import * as React from "react";
+import { DataAdapter } from "../../../Data/DataAdapter";
+import { Suggestion } from "../../../Models";
+import { SubmitSuggestionButtons } from "../../Common/SubmitSuggestionButtons";
 import { ISearchbarProps } from "./ISearchbarProps";
 import { ISearchbarState } from "./ISearchbarState";
+import "./Searchbar.module.scss";
+
 
 export class Searchbar extends React.Component<ISearchbarProps, ISearchbarState>
 {

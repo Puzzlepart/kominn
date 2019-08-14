@@ -1,24 +1,24 @@
 import * as React from "react";
-import { Row, Col } from "react-bootstrap";
-import { Suggestion } from "../../Common/Suggestion";
+import { Col } from "react-bootstrap";
 import * as vis from "vis";
+import { Suggestion } from "../../../Models";
+import { INodeViewProps } from "./INodeViewProps";
 
-interface NodeViewProps { Origin?: Suggestion, Suggestions?: Array<Suggestion> }
-export class NodeView extends React.Component<NodeViewProps, any>
+export class NodeView extends React.Component<INodeViewProps, any>
 {
     componentDidMount() {
         this.drawNodes(this.props);
     }
 
-    componentWillReceiveProps(newprops: NodeViewProps) {
+    componentWillReceiveProps(newprops: INodeViewProps) {
         this.drawNodes(newprops);
     }
-    drawNodes(props: NodeViewProps) {
+    drawNodes(props: INodeViewProps) {
         if (props.Suggestions == null || props.Suggestions.length <= 0)
             return;
 
         var rootId = props.Origin.Id;
-        var nextSuggestions = new Array<Suggestion>();
+        var nextSuggestions = [];
         for (let v of props.Suggestions) {
             for (let i of v.InspiredBy) {
                 if (i.Id === rootId) {

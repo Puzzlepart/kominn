@@ -1,8 +1,8 @@
-import { Suggestion } from "../../Common/Suggestion";
+import { Suggestion } from "../../../Models";
 import { PopularSuggestionsSortTypes } from "./PopularSuggestionsSortTypes";
 import { PopularSuggestionsFilter } from "./PopularSuggestionsFilter";
 export interface IPopularSuggestionsState {
-    suggestions: Array<Suggestion>;
+    suggestions: Suggestion[];
     top?: number;
     maxReached?: boolean;
     sorting?: PopularSuggestionsSortTypes;

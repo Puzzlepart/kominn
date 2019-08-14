@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Tools } from "../../Common/Tools";
-import { SustainabilityGoal } from "../../Common/SustainabilityGoal";
+import { Tools } from "../../../Tools";
 import { IDetailsProps } from "./IDetailsProps";
+import { SustainabilityGoals } from "../../Common";
 
 export class Details extends React.Component<IDetailsProps, any>
 {
@@ -18,14 +18,7 @@ export class Details extends React.Component<IDetailsProps, any>
                     <div><strong>Nyttetype</strong></div>
                     <div>{this.props.suggestion.UsefulnessType}</div>
                 </div>
-                <div style={{ margin: '10px 0 10px 0' }} hidden={this.props.suggestion.SustainabilityGoals.length === 0}>
-                    <div><strong>Bærekraftsmål</strong></div>
-                    <div>
-                        {this.props.suggestion.SustainabilityGoals.map((goal: SustainabilityGoal, idx: number) => {
-                            return <img key={idx} src={goal.ImageSrc} style={{ display: "inline-block", minHeight: "auto", height: "47px", width: "47px", marginTop: "2px", marginRight: "5px" }} />
-                        })}
-                    </div>
-                </div>
+                <SustainabilityGoals style={{ margin: '10px 0 10px 0' }} goals={this.props.suggestion.SustainabilityGoals} />
             </>
         )
     }

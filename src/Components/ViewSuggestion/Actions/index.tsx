@@ -1,8 +1,7 @@
 import * as React from "react"
-import { Suggestion } from "../../Common/Suggestion";
-import { DataAdapter } from "../../Common/DataAdapter";
+import { DataAdapter } from "../../../Data/DataAdapter";
 import { DoneThisModal } from "../../Common/DoneThisModal";
-import { Status } from "../../Common/Status";
+import { Status, Suggestion } from "../../../Models";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";

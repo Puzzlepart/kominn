@@ -5,7 +5,7 @@ import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { ISuggestionRatingState } from "./ISuggestionRatingState";
 import { ISuggestionRatingProps } from "./ISuggestionRatingProps";
-import { DataAdapter } from "../../Common/DataAdapter";
+import { DataAdapter } from "../../../Data/DataAdapter";
 
 export class SuggestionRating extends React.Component<ISuggestionRatingProps, ISuggestionRatingState>
 {

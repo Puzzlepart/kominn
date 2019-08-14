@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Comment } from "../../Common/Comment";
-import { Tools } from "../../Common/Tools";
-import { DataAdapter } from "../../Common/DataAdapter";
+import { SuggestionComment } from "../../../Models/SuggestionComment";
+import { Tools } from "../../../Tools";
+import { DataAdapter } from "../../../Data/DataAdapter";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { ICommentsState } from "./ICommentsState";
@@ -34,7 +34,7 @@ export class Comments extends React.Component<ICommentsProps, ICommentsState>
                     <PrimaryButton text="Send kommentar" disabled={this.state.text.length < 3} onClick={this.submitComment.bind(this)} />
                 </div>
                 <ul className="comments-list">
-                    {this.props.suggestion.Comments.map((item: Comment, idx: number) => {
+                    {this.props.suggestion.Comments.map((item: SuggestionComment, idx: number) => {
                         return (
                             <li key={idx}>
                                 <div className="img-block">
