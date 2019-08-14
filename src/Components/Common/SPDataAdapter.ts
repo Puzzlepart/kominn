@@ -114,10 +114,10 @@ export class SPDataAdapter {
                         p.Zipcode = result.KmiZipcode;
                         s.Id = result.Id;
                         s.Challenges = result.KmiChallenges;
-                        s.Image = Tools.IsNull(result.KmiImage) ? "" : result.KmiImage;
-                        s.Likes = Tools.IsNull(result.KmiLikes) ? 0 : result.KmiLikes;
+                        s.Image = Tools.isNull(result.KmiImage) ? "" : result.KmiImage;
+                        s.Likes = Tools.isNull(result.KmiLikes) ? 0 : result.KmiLikes;
                         s.Location = result.KmiLocation;
-                        s.NumberOfComments = Tools.IsNull(result.KmiNumberOfComments) ? 0 : result.KmiNumberOfComments;
+                        s.NumberOfComments = Tools.isNull(result.KmiNumberOfComments) ? 0 : result.KmiNumberOfComments;
                         s.Status = Tools.convertStatus(result.KmiStatus);
                         s.StatusString = result.KmiStatus;
                         s.Submitter = p;

@@ -44,7 +44,7 @@ export class Comments extends React.Component<ICommentsProps, ICommentsState>
                                     </div>
                                 </div>
                                 <div className="text-block">
-                                    <strong className="title">{item.CreatedBy} - <time >{Tools.FormatDate(item.Created)}</time></strong>
+                                    <strong className="title">{item.CreatedBy} - <time >{Tools.formatDate(item.Created)}</time></strong>
                                     <div className="comment-area">
                                         <div className="text-wrapp">
                                             <p>{item.Text}</p>

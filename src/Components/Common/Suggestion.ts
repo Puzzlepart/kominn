@@ -75,7 +75,7 @@ export class Suggestion {
         if (this.Location == null)
             return null;
 
-        if (!Tools.IsLatLong(this.Location))
+        if (!Tools.isLatLong(this.Location))
             return null;
 
         var s = this.Location.split(',');
