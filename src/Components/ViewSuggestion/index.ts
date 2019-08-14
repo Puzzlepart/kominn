@@ -4,3 +4,4 @@ export { Summary } from "./Summary";
 export { MapView } from "./Map";
 export { InspiredBy } from "./InspiredBy";
 export { Comments } from "./Comments";
+export { SuggestionRating } from "./SuggestionRating";

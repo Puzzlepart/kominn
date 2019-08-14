@@ -135,7 +135,9 @@ export class DataAdapter {
         });
     }
 
-    
+    doesUserHavePermission(kind: SP.PermissionKind) {
+        return adapter.doesUserHavePermission(kind);
+    }
 
     /**
      * Get config

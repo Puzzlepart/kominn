@@ -261,7 +261,7 @@ export class Like {
             context.load(item);
             context.executeQueryAsync(((result: any) => {
                 this.SuggestionItem.Likes += 1;
-                this.UpdateLikeCountInList().then(() => {
+                this.updateLikeCountInList().then(() => {
                     this.LikeListItemId = item.get_id();
                     this.UserLikesThis = true;
                     this.Processing = false;
@@ -291,7 +291,7 @@ export class Like {
             item.deleteObject();
             context.executeQueryAsync(((r: any) => {
                 this.SuggestionItem.Likes -= 1;
-                this.UpdateLikeCountInList().then(() => {
+                this.updateLikeCountInList().then(() => {
                     this.UserLikesThis = false;
                     this.Processing = false;
                     resolve(this.SuggestionItem.Likes);
@@ -303,7 +303,7 @@ export class Like {
         });
     }
 
-    private UpdateLikeCountInList(): Promise<{}> {
+    private updateLikeCountInList(): Promise<{}> {
         return new Promise((resolve, reject) => {
             var context = SP.ClientContext.get_current();
             var list = context.get_web().get_lists().getByTitle("Forslag");
