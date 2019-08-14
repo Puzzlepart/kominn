@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/DropDown";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
-import { DataAdapter } from "../Data/DataAdapter";
-import { Suggestion } from "../Models";
+import { DataAdapter } from "../../Data/DataAdapter";
+import { Suggestion } from "../../Models";
 import { ISendTilKSState } from "./ISendTilKSState";
 
 export class SendTilKS extends React.Component<{}, ISendTilKSState>
 {
+    private dataAdapter: DataAdapter = new DataAdapter();
+
     constructor(props: any) {
         super(props);
         this.state = {
@@ -21,8 +23,7 @@ export class SendTilKS extends React.Component<{}, ISendTilKSState>
     }
 
     loadSuggestions() {
-        var da = new DataAdapter();
-        da.getAllSuggestions().then((a: Suggestion[]) => {
+        this.dataAdapter.getAllSuggestions().then((a: Suggestion[]) => {
             this.setState({ allSuggestions: a });
         })
     }
@@ -39,17 +40,14 @@ export class SendTilKS extends React.Component<{}, ISendTilKSState>
     }
 
     submitToKS() {
-        var da = new DataAdapter();
-        da.submitToInduct(this.state.selectedSuggestion).then((s: string) => {
+        this.dataAdapter.submitToInduct(this.state.selectedSuggestion).then((s: string) => {
             console.log("res ", s);
-
             this.setState({ selectedSuggestion: new Suggestion(), message: "Forslaget er sendt til Induct." }, () => this.loadSuggestions());
         });
 
     }
 
     render() {
-
         if (!this.state.allSuggestions)
             return <div></div>
 

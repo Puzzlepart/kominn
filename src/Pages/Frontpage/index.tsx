@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as moment from "moment";
-import { Searchbar, PromotedSuggestions, PopularSuggestions, SuccessStories, MySuggestions } from "./Components/Frontpage";
+import { Searchbar, PromotedSuggestions, PopularSuggestions, SuccessStories, MySuggestions } from "../../Components/Frontpage";
 
-export class Frontpage extends React.Component<any, any>
+export class Frontpage extends React.Component<{}, {}>
 {
     render() {
         return (
