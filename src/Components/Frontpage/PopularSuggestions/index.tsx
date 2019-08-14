@@ -1,19 +1,17 @@
-import * as React from "react";
-import "./PopularSuggestions.module.scss";
-import { Suggestion } from "../../Common/Suggestion";
-import { DataAdapter } from "../../Common/DataAdapter";
-import { Status } from "../../Common/Status";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
-import { Toggle } from "office-ui-fabric-react/lib/Toggle";
+import { DocumentCard, DocumentCardActions, DocumentCardLocation, DocumentCardPreview, DocumentCardTitle } from "office-ui-fabric-react/lib/DocumentCard";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { ImageFit } from "office-ui-fabric-react/lib/Image";
-import { DocumentCard, DocumentCardLocation, DocumentCardPreview, DocumentCardTitle, DocumentCardActions } from "office-ui-fabric-react/lib/DocumentCard";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import * as _ from "lodash";
-import { PopularSuggestionsSortTypes } from "./PopularSuggestionsSortTypes";
-import { PopularSuggestionsFilter } from "./PopularSuggestionsFilter";
-import { IPopularSuggestionsState } from "./IPopularSuggestionsState";
+import { Toggle } from "office-ui-fabric-react/lib/Toggle";
+import * as React from "react";
+import { DataAdapter } from "../../Common/DataAdapter";
+import { Status } from "../../Common/Status";
+import { Suggestion } from "../../Common/Suggestion";
 import { IPopularSuggestionsProps } from "./IPopularSuggestionsProps";
+import { IPopularSuggestionsState } from "./IPopularSuggestionsState";
+import "./PopularSuggestions.module.scss";
+import { PopularSuggestionsFilter } from "./PopularSuggestionsFilter";
+import { PopularSuggestionsSortTypes } from "./PopularSuggestionsSortTypes";
 
 export class PopularSuggestions extends React.Component<IPopularSuggestionsProps, IPopularSuggestionsState>
 {
@@ -35,7 +33,6 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
         this.loadSuggestions(3);
     }
 
-    @autobind
     private loadMoreSuggestions() {
         this.loadSuggestions(3);
     }
@@ -104,7 +101,6 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
         ));
     }
 
-    @autobind
     private sortSuggestions(option: IDropdownOption) {
         this.setState({ sorting: option.data });
         this.loadSuggestions(0);
@@ -165,12 +161,10 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
         );
     }
 
-    @autobind
     showFilter() {
         this.setState({ showSorting: false, showFilter: !this.state.showFilter });
     }
 
-    @autobind
     showSorting() {
         this.setState({ showFilter: false, showSorting: !this.state.showSorting });
     }
@@ -183,14 +177,14 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
             <section className="PopularSuggestions">
                 <h2>{this.props.title}</h2>
                 <div className="actions">
-                    <DefaultButton onClick={this.showFilter} iconProps={{ iconName: "Filter" }} />
-                    <DefaultButton onClick={this.showSorting} iconProps={{ iconName: "Sort" }} />
+                    <DefaultButton onClick={this.showFilter.bind(this)} iconProps={{ iconName: "Filter" }} />
+                    <DefaultButton onClick={this.showSorting.bind(this)} iconProps={{ iconName: "Sort" }} />
                 </div>
                 {this.state.showSorting && this.renderSorting()}
                 {this.state.showFilter && this.renderFiltering()}
                 {this.renderPopularSuggestions()}
                 <div className="footer actions">
-                    <DefaultButton onClick={this.loadMoreSuggestions} text="Vis flere innsendte forslag" hidden={this.state.maxReached} />
+                    <DefaultButton onClick={this.loadMoreSuggestions.bind(this)} text="Vis flere innsendte forslag" hidden={this.state.maxReached} />
                 </div>
             </section>
         );

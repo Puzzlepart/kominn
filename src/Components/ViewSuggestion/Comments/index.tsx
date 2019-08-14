@@ -4,7 +4,6 @@ import { Tools } from "../../Common/Tools";
 import { DataAdapter } from "../../Common/DataAdapter";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { ICommentsState } from "./ICommentsState";
 import { ICommentsProps } from "./ICommentsProps";
 
@@ -15,9 +14,7 @@ export class Comments extends React.Component<ICommentsProps, ICommentsState>
         this.state = { text: "" };
     }
 
-    @autobind
-    async submitComment(evt: any) {
-        evt.preventDefault();
+    async submitComment() {
         await new DataAdapter().submitCommentForSuggestion(this.state.text, this.props.suggestion);
         this.props.onCommentSubmitted();
         this.setState({ text: "" });
@@ -26,13 +23,15 @@ export class Comments extends React.Component<ICommentsProps, ICommentsState>
     render() {
         return (
             <div>
-                <TextField
-                    label="Kommentarer"
-                    placeholder="Hva syntes du om forslaget?"
-                    multiline={true}
-                    onChange={(_event, newValue) => this.setState({ text: newValue })} />
+                <h2>Kommentarer</h2>
                 <div style={{ marginTop: 10 }}>
-                    <PrimaryButton text="Send kommentar" disabled={this.state.text.length < 3} onClick={this.submitComment} />
+                    <TextField
+                        placeholder="Hva syntes du om forslaget?"
+                        multiline={true}
+                        onChange={(_, newValue) => this.setState({ text: newValue })} />
+                </div>
+                <div style={{ marginTop: 10 }}>
+                    <PrimaryButton text="Send kommentar" disabled={this.state.text.length < 3} onClick={this.submitComment.bind(this)} />
                 </div>
                 <ul className="comments-list">
                     {this.props.suggestion.Comments.map((item: Comment, idx: number) => {
@@ -55,6 +54,7 @@ export class Comments extends React.Component<ICommentsProps, ICommentsState>
                         )
                     })}
                 </ul>
+                <a id="kommentar"></a>
             </div>
         )
     }

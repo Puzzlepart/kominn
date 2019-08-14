@@ -1,11 +1,10 @@
-import * as React from "react";
-import "./MySuggestions.module.scss";
-import { Suggestion } from "../../Common/Suggestion";
-import { DataAdapter } from "../../Common/DataAdapter";
-import { DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, IColumn, SelectionMode } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
+import * as React from "react";
+import { DataAdapter } from "../../Common/DataAdapter";
+import { Suggestion } from "../../Common/Suggestion";
 import { IMySuggestionsState } from "./IMySuggestionsState";
+import "./MySuggestions.module.scss";
 
 export class MySuggestions extends React.Component<any, IMySuggestionsState>
 {
@@ -14,14 +13,11 @@ export class MySuggestions extends React.Component<any, IMySuggestionsState>
 		this.state = { suggestions: new Array<Suggestion>() };
 	}
 
-	componentWillMount() {
-		var d = new DataAdapter();
-		d.getMySuggestions().then((results: Array<Suggestion>) => {
-			this.setState({ suggestions: results });
-		});
+	async componentWillMount() {
+		const suggestions = await new DataAdapter().getMySuggestions();
+		this.setState({ suggestions });
 	}
 
-	@autobind
 	onRenderItemColumn(item: Suggestion, _index: number, column: IColumn) {
 		const colValue = item[column.fieldName];
 		switch (column.key) {
@@ -49,7 +45,8 @@ export class MySuggestions extends React.Component<any, IMySuggestionsState>
 							{ key: "Likes", name: "Likes", fieldName: "Likes", minWidth: 0 },
 							{ key: "Status", name: "Status", fieldName: "StatusString", minWidth: 0 },
 						]}
-						onRenderItemColumn={this.onRenderItemColumn} />
+						onRenderItemColumn={this.onRenderItemColumn.bind(this)}
+						selectionMode={SelectionMode.none} />
 				</div>
 			</section>
 		)
