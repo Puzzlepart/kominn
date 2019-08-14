@@ -58,7 +58,7 @@ export class ViewSuggestion extends React.Component<any, IViewSuggestionState>
                         <Searchbar showBackButton={true} />
                     </section>
                 </div>
-                <div className="ms-Grid-row">
+                <div className="ms-Grid-row" style={{ paddingTop: 20 }}>
                     <section className="ms-Grid-col ms-sm7 ms-smPush1">
                         <Content suggestion={suggestion} />
                         <Summary suggestion={suggestion} />

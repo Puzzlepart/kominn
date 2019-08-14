@@ -3,7 +3,6 @@ import { Slider } from "office-ui-fabric-react/lib/Slider";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { ISuggestionRatingState } from "./ISuggestionRatingState";
 import { ISuggestionRatingProps } from "./ISuggestionRatingProps";
 import { DataAdapter } from "../../Common/DataAdapter";
@@ -28,13 +27,9 @@ export class SuggestionRating extends React.Component<ISuggestionRatingProps, IS
     }
 
     async componentWillMount() {
-        let test = await new DataAdapter().doesUserHavePermission(SP.PermissionKind.manageWeb);
-        console.log('doesUserHavePermission', test);
-        this.checkPermissionsToList()
-            .then((userHasPermissions: boolean) => {
-                this.setState({ userHasPermissions });
-                if (userHasPermissions) this.getExisting();
-            });
+        let userHasPermissions = await new DataAdapter().doesUserHavePermission(SP.PermissionKind.manageWeb);
+        this.setState({ userHasPermissions });
+        if (userHasPermissions) this.getExisting();
     }
 
     render() {
@@ -90,7 +85,7 @@ export class SuggestionRating extends React.Component<ISuggestionRatingProps, IS
                     <DefaultButton
                         text="Lagre forslagsvurdering"
                         iconProps={{ iconName: "Save" }}
-                        onClick={this.save}
+                        onClick={this.save.bind(this)}
                         disabled={this.state.isSaving} />
                 </div>
             </div>
@@ -112,7 +107,6 @@ export class SuggestionRating extends React.Component<ISuggestionRatingProps, IS
 
     }
 
-    @autobind
     private async save() {
         if (this.state.isSaving) return;
         this.setState({ isSaving: true, isSaved: false });
