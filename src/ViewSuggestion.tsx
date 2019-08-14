@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Searchbar } from "./Components/Frontpage/Searchbar";
-import { Content, Actions, Summary, MapView, InspiredBy, Comments, SuggestionRating } from "./Components/ViewSuggestion";
+import { Content, Actions, Summary, MapView, Details, InspiredBy, Comments, SuggestionRating } from "./Components/ViewSuggestion";
 import { Suggestion } from "./Components/Common/Suggestion";
 import { DataAdapter } from "./Components/Common/DataAdapter";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
@@ -67,6 +67,7 @@ export class ViewSuggestion extends React.Component<any, IViewSuggestionState>
                     <section className="ms-Grid-col ms-sm3 ms-smPush1">
                         <Actions suggestion={suggestion} />
                         <SuggestionRating sugggestion={suggestion} />
+                        <Details suggestion={suggestion} />
                         <MapView apiKey={this.config.GOOGLE_MAPS_API_KEY} suggestion={suggestion} />
                     </section>
                 </div>
