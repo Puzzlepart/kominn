@@ -35,7 +35,6 @@ export interface ISPUserProfile {
     UserProfileProperties: UserProfilePropertyArray<IUserProfileProperty>
 }
 
-interface UserImage { ImageUrl: string, Username: string }
 class UserProfilePropertyArray<T> extends Array<any>
 {
     public findByKey(key: string): T {

@@ -83,6 +83,7 @@ export class NewSuggestion extends React.Component<INewSuggestionProps, INewSugg
             return (
                 <>
                     <Searchbar
+                        placeholderText="Søk etter forslag..."
                         showBackButton={true}
                         showSearchBox={false}
                         showSuggestionButtons={false} />
@@ -97,6 +98,7 @@ export class NewSuggestion extends React.Component<INewSuggestionProps, INewSugg
         return (
             <>
                 <Searchbar
+                    placeholderText="Søk etter forslag..."
                     showBackButton={true}
                     showSearchBox={false}
                     showSuggestionButtons={false} />

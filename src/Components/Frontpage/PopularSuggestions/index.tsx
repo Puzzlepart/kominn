@@ -1,9 +1,12 @@
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { DocumentCard, DocumentCardActions, DocumentCardLocation, DocumentCardPreview, DocumentCardTitle } from "office-ui-fabric-react/lib/DocumentCard";
 import { ImageFit } from "office-ui-fabric-react/lib/Image";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import * as React from "react";
 import { DataAdapter } from "../../../Data/DataAdapter";
 import { Status, Suggestion } from "../../../Models";
+import { Tools } from '../../../Tools';
+import { SustainabilityGoals } from "../../Common";
 import { IPopularSuggestionsProps } from "./IPopularSuggestionsProps";
 import { IPopularSuggestionsState } from "./IPopularSuggestionsState";
 import "./PopularSuggestions.module.scss";
@@ -40,7 +43,7 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
                     <DefaultButton onClick={this.showFilter.bind(this)} iconProps={{ iconName: "Filter" }} />
                     <DefaultButton onClick={this.showSorting.bind(this)} iconProps={{ iconName: "Sort" }} />
                 </div>
-                <PopularSuggestionsFiltersSorting hidden={this.state.showSorting} onSort={this.sortSuggestions.bind(this)} />
+                <PopularSuggestionsFiltersSorting hidden={!this.state.showSorting} onSort={this.sortSuggestions.bind(this)} />
                 <PopularSuggestionsFilters
                     hidden={!this.state.showFilter}
                     filters={this.state.filterValues}
@@ -106,17 +109,24 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
     }
 
     private renderPopularSuggestions() {
-        console.log(this.state.suggestions);
-        return this.state.suggestions.map((i: Suggestion, idx: number) => (
-            <div key={`Card_${idx}`} style={{ verticalAlign: "top", display: "inline-block", margin: "0 10px 10px 0" }}>
-                <DocumentCard onClickHref={i.Url}>
-                    <DocumentCardPreview previewImages={[{ previewImageSrc: i.Image, width: 318, height: 140, imageFit: ImageFit.cover }]} />
-                    <DocumentCardTitle title={i.Title} />
-                    <DocumentCardLocation location={i.Created.toLocaleDateString()} />
-                    <DocumentCardLocation location={i.Submitter.Name} />
+        if (this.state.suggestions.length === 0) {
+            return (
+                <div style={{ width: 500, margin: "0 auto 0 auto" }}>
+                    <MessageBar messageBarType={MessageBarType.info}>{this.props.emptyText}</MessageBar>
+                </div>
+            );
+        }
+        return this.state.suggestions.map((suggestion: Suggestion, idx: number) => (
+            <div key={idx} style={{ verticalAlign: "top", display: "inline-block", margin: "0 10px 10px 0" }}>
+                <DocumentCard onClickHref={suggestion.Url}>
+                    <DocumentCardPreview previewImages={[{ previewImageSrc: suggestion.Image, width: 318, height: 140, imageFit: ImageFit.cover }]} />
+                    <DocumentCardTitle title={suggestion.Title} />
+                    <DocumentCardLocation location={Tools.formatDate(suggestion.Created)} />
+                    <DocumentCardLocation location={suggestion.Submitter.Name} />
+                    <SustainabilityGoals style={{ margin: '10px 0 10px 0' }} goals={suggestion.SustainabilityGoals} />
                     <DocumentCardActions actions={[
-                        { onClick: () => this.dataAdapter.updateLike(i), iconProps: { iconName: "Like" }, name: `${i.Likes}`, },
-                        { iconProps: { iconName: "Comment" }, name: `${i.NumberOfComments}`, },
+                        { onClick: () => this.dataAdapter.updateLike(suggestion), iconProps: { iconName: "Like" }, name: `${suggestion.Likes}`, },
+                        { iconProps: { iconName: "Comment" }, name: `${suggestion.NumberOfComments}`, },
                     ]} />
                 </DocumentCard>
             </div>

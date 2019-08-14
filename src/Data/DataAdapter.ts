@@ -51,7 +51,7 @@ export class DataAdapter {
      * Get suggestion by id     
      */
     getSuggestionById(id: string) {
-        return SPDataAdapter.getAllSuggestions(null, 1, "&$filter=Id eq " + id);
+        return SPDataAdapter.getAllSuggestions(null, 1, `&$filter=Id eq ${id}`);
     }
 
     /**
@@ -111,9 +111,8 @@ export class DataAdapter {
     }
 
     getAllCampaigns(): Promise<Array<Campaign>> {
-        return new Promise((resolve, _reject) => {
-
-            $.get(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Kampanje')/Items").then((s: any) => {
+        return new Promise(resolve => {
+            $.get(`${_spPageContextInfo.webAbsoluteUrl}/_api/web/lists/getbytitle('Kampanje')/Items`).then((s: any) => {
                 var campaigns = s.d.results.map((i: any) => {
                     var campaign = new Campaign();
                     campaign.CompRef = i.KmiCampaignRef;

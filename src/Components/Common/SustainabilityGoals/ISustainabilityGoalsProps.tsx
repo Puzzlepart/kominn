@@ -1,6 +1,7 @@
 import { SustainabilityGoal } from "../../../Models";
 
 export interface ISustainabilityGoalsProps {
-    style: React.CSSProperties;
+    showTitle?: boolean;
+    style?: React.CSSProperties;
     goals: SustainabilityGoal[];
 }

@@ -2,12 +2,14 @@ import * as React from "react";
 import { SustainabilityGoal } from "../../../Models";
 import { ISustainabilityGoalsProps } from "./ISustainabilityGoalsProps";
 
-export class SustainabilityGoals extends React.Component<ISustainabilityGoalsProps, any>
+export class SustainabilityGoals extends React.Component<ISustainabilityGoalsProps, {}>
 {
+    public static defaultProps: Partial<ISustainabilityGoalsProps> = { showTitle: true };
+
     render() {
         return (
             <div style={this.props.style} hidden={this.props.goals.length === 0}>
-                <div><strong>Bærekraftsmål</strong></div>
+                <div hidden={!this.props.showTitle}><strong>Bærekraftsmål</strong></div>
                 <div>
                     {this.props.goals.map((goal: SustainabilityGoal, idx: number) => {
                         return (

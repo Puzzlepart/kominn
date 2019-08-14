@@ -50,7 +50,11 @@ export class Searchbar extends React.Component<ISearchbarProps, ISearchbarState>
                 gapSpace={10}
                 onDismiss={_ => this.setState({ showSuggestions: false })}>
                 <div style={{ padding: 25 }}>
-                    {this.state.suggestions.map((item: Suggestion, idx: number) => <div key={idx}><a href={item.Url}>{item.Title}</a></div>)}
+                    {this.state.suggestions.map((item: Suggestion, idx: number) => (
+                        <div key={idx}>
+                            <a href={item.Url}>{item.Title}</a>
+                        </div>
+                    ))}
                 </div>
             </Callout>
         );
@@ -68,7 +72,7 @@ export class Searchbar extends React.Component<ISearchbarProps, ISearchbarState>
                             text="Tilbake" />
                     </div>
                     <div ref="SearchBox" hidden={!this.props.showSearchBox} className="ms-Grid-col ms-sm5">
-                        <SearchBox placeholder="Søk etter forslag..." onChange={this.searchSuggestion} />
+                        <SearchBox placeholder={this.props.placeholderText} onChange={this.searchSuggestion} />
                     </div>
                     <div hidden={!this.props.showSuggestionButtons} className="ms-Grid-col ms-sm5">
                         <SubmitSuggestionButtons />

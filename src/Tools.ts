@@ -14,6 +14,23 @@ export class Tools {
 
         }
     }
+    
+    public static getMonthName(date: Date): string {
+		switch (date.getMonth()) {
+			case 0: return "Januar";
+			case 1: return "Februar";
+			case 2: return "Mars";
+			case 3: return "April";
+			case 4: return "Mai";
+			case 5: return "Juni";
+			case 6: return "Juli";
+			case 7: return "August";
+			case 8: return "September";
+			case 9: return "Oktober";
+			case 10: return "November";
+			case 11: return "Desember";
+		}
+	}
 
     public static convertStatus(status: string): Status {
         switch (status) {
@@ -29,10 +46,21 @@ export class Tools {
         return str == null || str == undefined;
     }
 
-    public static formatDate(date: Date): string {
-        return this.padZero(date.getDate()) + "." +
-            this.padZero(date.getMonth() + 1) + "." +
-            date.getFullYear();
+    public static formatDate(date: Date, includeTime = false): string {
+        let options: Intl.DateTimeFormatOptions = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        };
+        if (includeTime) {
+            options = {
+                ...options,
+                hour: '2-digit',
+                minute: '2-digit',
+            }
+        }
+        return date.toLocaleString('nb', options);
     }
 
     public static isLatLong(location: string): boolean {

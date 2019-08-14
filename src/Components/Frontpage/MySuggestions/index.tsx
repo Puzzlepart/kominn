@@ -2,12 +2,20 @@ import { DetailsList, IColumn, SelectionMode } from "office-ui-fabric-react/lib/
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as React from "react";
 import { DataAdapter } from "../../../Data/DataAdapter";
+import { Suggestion } from "../../../Models";
 import { IMySuggestionsState } from "./IMySuggestionsState";
 import "./MySuggestions.module.scss";
-import { Suggestion } from "../../../Models";
+import { IMySuggestionsProps } from "./IMySuggestionsProps";
 
-export class MySuggestions extends React.Component<any, IMySuggestionsState>
+export class MySuggestions extends React.Component<IMySuggestionsProps, IMySuggestionsState>
 {
+	private _columns: IColumn[] = [
+		{ key: "Title", name: "Title", fieldName: "Title", minWidth: 0 },
+		{ key: "Created", name: "Created", fieldName: "CreatedString", minWidth: 0 },
+		{ key: "Likes", name: "Likes", fieldName: "Likes", minWidth: 0 },
+		{ key: "Status", name: "Status", fieldName: "StatusString", minWidth: 0 },
+	];
+
 	constructor(props: any) {
 		super(props);
 		this.state = { suggestions: [] };
@@ -35,16 +43,11 @@ export class MySuggestions extends React.Component<any, IMySuggestionsState>
 		return (
 			<section className="MySuggestions">
 				<div className="container">
-					<h2>Mine forslag</h2>
+					<h2>{this.props.title}</h2>
 					<DetailsList
 						isHeaderVisible={false}
 						items={this.state.suggestions}
-						columns={[
-							{ key: "Title", name: "Title", fieldName: "Title", minWidth: 0 },
-							{ key: "Created", name: "Created", fieldName: "CreatedString", minWidth: 0 },
-							{ key: "Likes", name: "Likes", fieldName: "Likes", minWidth: 0 },
-							{ key: "Status", name: "Status", fieldName: "StatusString", minWidth: 0 },
-						]}
+						columns={this._columns}
 						onRenderItemColumn={this.onRenderItemColumn.bind(this)}
 						selectionMode={SelectionMode.none} />
 				</div>

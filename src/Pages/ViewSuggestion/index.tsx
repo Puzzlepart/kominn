@@ -31,16 +31,15 @@ export class ViewSuggestion extends React.Component<any, IViewSuggestionState>
             this.redirectToFrontpage();
             return;
         }
-        this.dataAdapter.getSuggestionById(id).then(
-            (s: Suggestion[]) => {
-                if (s.length <= 0) {
-                    this.redirectToFrontpage();
-                    return;
-                }
-                this.dataAdapter.getCommentsForSuggestion(s[0]).then((suggestion: Suggestion) => {
-                    this.setState({ suggestion });
-                });
+        this.dataAdapter.getSuggestionById(id).then((s: Suggestion[]) => {
+            if (s.length <= 0) {
+                this.redirectToFrontpage();
+                return;
+            }
+            this.dataAdapter.getCommentsForSuggestion(s[0]).then((suggestion: Suggestion) => {
+                this.setState({ suggestion });
             });
+        });
     }
 
     redirectToFrontpage() {
@@ -55,7 +54,7 @@ export class ViewSuggestion extends React.Component<any, IViewSuggestionState>
             <div className="ms-Grid">
                 <div className="ms-Grid-row">
                     <section className="ms-Grid-col ms-sm12">
-                        <Searchbar showBackButton={true} />
+                        <Searchbar placeholderText="Søk etter forslag..." showBackButton={true} />
                     </section>
                 </div>
                 <div className="ms-Grid-row" style={{ paddingTop: 20 }}>
