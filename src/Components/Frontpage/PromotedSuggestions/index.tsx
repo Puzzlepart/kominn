@@ -4,8 +4,7 @@ import "./PromotedSuggestions.module.scss";
 import { DataAdapter } from "../../../Data/DataAdapter";
 import { Status } from "../../../Models/Status";
 import { IPromotedSuggestionsState } from "./IPromotedSuggestionsState";
-
-interface IPromotedSuggestionsProps { }
+import { IPromotedSuggestionsProps } from "./IPromotedSuggestionsProps";
 
 export class PromotedSuggestions extends React.Component<IPromotedSuggestionsProps, IPromotedSuggestionsState>
 {
