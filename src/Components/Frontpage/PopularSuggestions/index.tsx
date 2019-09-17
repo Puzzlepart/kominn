@@ -61,7 +61,13 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
         this.loadSuggestions(3);
     }
 
-    private async loadSuggestions(incrementTop?: number) {
+    /**
+     * Load suggestions
+     * 
+     * @param {number} incrementTop Increment top
+     * @param {string} filterDateField Date field used for filtering
+     */
+    private async loadSuggestions(incrementTop?: number, filterDateField = 'Created') {
         var customSort = "";
         if (this.state.sorting != null) {
             if (this.state.sorting == PopularSuggestionsSortTypes.DateAsc)
@@ -70,7 +76,7 @@ export class PopularSuggestions extends React.Component<IPopularSuggestionsProps
                 customSort = "&$orderby=Created desc";
         }
 
-        var customFilter = `&$filter=KmiStatus eq 'Publisert' and Created gt datetime'${this.props.fromDate.toISOString()}' and Created lt datetime'${this.props.toDate.toISOString()}'`;
+        var customFilter = `&$filter=KmiStatus eq 'Publisert' and ${filterDateField} gt datetime'${this.props.fromDate.toISOString()}' and ${filterDateField} lt datetime'${this.props.toDate.toISOString()}'`;
         if (this.state.filter != null && this.state.filter.length > 0) {
             for (let f of this.state.filter)
                 customFilter += ` and ${encodeURI(`Kmi${f.Type}`)} eq '${encodeURI(f.Value)}'`;

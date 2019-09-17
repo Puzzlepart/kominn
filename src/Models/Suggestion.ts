@@ -36,7 +36,7 @@ export class Suggestion {
     }
 
     public get Url(): string {
-        return  `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forslag.aspx?forslag=${this.Id}`;
+        return `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forslag.aspx?forslag=${this.Id}`;
     }
 
     public get Validates(): boolean {
